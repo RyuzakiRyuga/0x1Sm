@@ -1,0 +1,313 @@
+<html lang="en">
+<head>
+  <title>0x1Sm - Next-Gen Security Solutions</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --neon-blue: #00fff2;
+      --neon-pink: #ff00ff;
+      --dark-bg: #0a0a12;
+      --cyber-purple: #9600ff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Share Tech Mono', 'Rajdhani', sans-serif;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    .noise-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 10, 18, 0.95);
+      z-index: -1;
+    }
+
+    nav {
+      background: rgba(10, 10, 18, 0.95);
+      padding: 1rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid var(--neon-blue);
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--neon-blue);
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(45deg, rgba(10, 10, 18, 0.9), rgba(150, 0, 255, 0.1));
+    }
+
+    .terminal-container {
+      background: rgba(10, 10, 18, 0.95);
+      padding: 1rem;
+      border: 1px solid var(--neon-blue);
+      border-radius: 10px;
+      width: 50%;
+      margin: 0 auto;
+    }
+
+    .terminal-header {
+      display: flex;
+      justify-content: flex-end;
+      padding: 0.5rem;
+    }
+
+    .terminal-button {
+      width: 1rem;
+      height: 1rem;
+      background: var(--neon-blue);
+      border-radius: 50%;
+      margin: 0 0.5rem;
+    }
+
+    .terminal-content {
+      padding: 1rem;
+    }
+
+    .cursor {
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .typing-text {
+      font-size: 1.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .cta-button {
+      background: transparent;
+      border: 2px solid var(--neon-blue);
+      color: var(--neon-blue);
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .cta-button:hover {
+      background: var(--neon-blue);
+      color: var(--dark-bg);
+      box-shadow: 0 0 20px var(--neon-blue);
+    }
+
+    .services {
+      padding: 4rem 2rem;
+    }
+
+    .hex-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem 0;
+    }
+
+    .hex-item {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--neon-blue);
+      border-radius: 10px;
+      padding: 2rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .hex-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px var(--neon-blue);
+    }
+
+    .hex-content {
+      padding: 1rem;
+    }
+
+    .hex-content h3 {
+      color: var(--neon-blue);
+      margin-bottom: 1rem;
+    }
+
+    .about {
+      padding: 4rem 2rem;
+    }
+
+    .about-content {
+      background: rgba(10, 10, 18, 0.95);
+      padding: 1rem;
+      border: 1px solid var(--neon-blue);
+      border-radius: 10px;
+    }
+
+    .matrix-rain {
+      background: linear-gradient(45deg, rgba(10, 10, 18, 0.9), rgba(150, 0, 255, 0.1));
+      height: 100px;
+      margin: 1rem 0;
+    }
+
+    .contact {
+      padding: 4rem 2rem;
+    }
+
+    .contact-form {
+      background: rgba(10, 10, 18, 0.95);
+      padding: 1rem;
+      border: 1px solid var(--neon-blue);
+      border-radius: 10px;
+    }
+
+    #secureForm {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+
+    #secureForm input, #secureForm textarea {
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border: 1px solid var(--neon-blue);
+      border-radius: 5px;
+    }
+
+    #secureForm textarea {
+      height: 100px;
+      resize: none;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="noise-overlay"></div>
+  
+  <nav>
+    <div class="nav-links">
+      <a href="#home">HOME</a>
+      <a href="#services">SERVICES</a>
+      <a href="#about">ABOUT</a>
+      <a href="#team">TEAM</a>
+      <a href="#contact">CONTACT</a>
+    </div>
+  </nav>
+
+  <section id="home" class="hero">
+    <div class="terminal-container">
+      <div class="terminal-header">
+        <span class="terminal-button"></span>
+        <span class="terminal-button"></span>
+        <span class="terminal-button"></span>
+      </div>
+      <div class="terminal-content">
+        <span class="cursor">></span> <span class="typing-text">Welcome to 0x1Sm_</span>
+      </div>
+    </div>
+    <p class="hero-subtitle">// Securing the Digital Frontier</p>
+    <button class="cta-button">Initialize Security Protocol</button>
+  </section>
+
+  <section id="services" class="services">
+    <h2 class="section-title">[Services]</h2>
+    <div class="hex-grid">
+      <div class="hex-item">
+        <div class="hex-content">
+          <h3>Offensive Security</h3>
+          <p>Advanced penetration testing and red team operations</p>
+        </div>
+      </div>
+      <div class="hex-item">
+        <div class="hex-content">
+          <h3>Zero-Day Research</h3>
+          <p>Vulnerability research and exploit development</p>
+        </div>
+      </div>
+      <div class="hex-item">
+        <div class="hex-content">
+          <h3>Incident Response</h3>
+          <p>24/7 emergency response and threat elimination</p>
+        </div>
+      </div>
+      <div class="hex-item">
+        <div class="hex-content">
+          <h3>Binary Analysis</h3>
+          <p>Reverse engineering and malware analysis</p>
+        </div>
+      </div>
+      <div class="hex-item">
+        <div class="hex-content">
+          <h3>Secure Architecture</h3>
+          <p>Zero-trust network design and implementation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <h2 class="section-title">[About Us]</h2>
+    <div class="about-content">
+      <div class="matrix-rain"></div>
+      <p>0x1Sm operates at the intersection of offensive security and defensive excellence. Our team of elite security researchers and engineers work tirelessly to stay ahead of emerging threats.</p>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2 class="section-title">[Contact]</h2>
+    <div class="contact-form">
+      <form id="secureForm">
+        <input type="text" placeholder="IDENTIFIER [NAME]" required>
+        <input type="email" placeholder="COMM_CHANNEL [EMAIL]" required>
+        <textarea placeholder="TRANSMISSION_CONTENT [MESSAGE]" required></textarea>
+        <button type="submit" class="cta-button">TRANSMIT</button>
+      </form>
+    </div>
+  </section>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
