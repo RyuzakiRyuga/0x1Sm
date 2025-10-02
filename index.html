@@ -1,313 +1,770 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>0x1Sm - Next-Gen Security Solutions</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    :root {
-      --neon-blue: #00fff2;
-      --neon-pink: #ff00ff;
-      --dark-bg: #0a0a12;
-      --cyber-purple: #9600ff;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sherif Mounir - Offensive Security</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Share Tech Mono', 'Rajdhani', sans-serif;
-    }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #0f0f1e;
+            color: #fff;
+            overflow-x: hidden;
+        }
 
-    body {
-      background-color: var(--dark-bg);
-      color: #fff;
-      line-height: 1.6;
-    }
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0 80px;
+            background: linear-gradient(135deg, #0a0a14 0%, #1a1a2e 50%, #16213e 100%);
+            overflow: hidden;
+        }
 
-    .noise-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(10, 10, 18, 0.95);
-      z-index: -1;
-    }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 0, 85, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(200, 0, 100, 0.08) 0%, transparent 50%);
+        }
 
-    nav {
-      background: rgba(10, 10, 18, 0.95);
-      padding: 1rem;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 2px solid var(--neon-blue);
-    }
+        /* Skull Background */
+        .skull-container {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45%;
+            height: 80vh;
+            z-index: 1;
+        }
 
-    .nav-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-    }
+        .skull-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to left, transparent 0%, #0a0a14 100%);
+            z-index: 2;
+        }
 
-    .nav-links a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1.2rem;
-      transition: color 0.3s;
-    }
+        .skull-figure {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
 
-    .nav-links a:hover {
-      color: var(--neon-blue);
-    }
+        .hood {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 60%;
+            background: linear-gradient(180deg, #1a1a2e 0%, #2a2a3e 100%);
+            clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%);
+            filter: blur(1px);
+        }
 
-    .hero {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      padding: 2rem;
-      background: linear-gradient(45deg, rgba(10, 10, 18, 0.9), rgba(150, 0, 255, 0.1));
-    }
+        .skull {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 350px;
+        }
 
-    .terminal-container {
-      background: rgba(10, 10, 18, 0.95);
-      padding: 1rem;
-      border: 1px solid var(--neon-blue);
-      border-radius: 10px;
-      width: 50%;
-      margin: 0 auto;
-    }
+        .skull-outline {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid #ff0055;
+            border-radius: 50% 50% 45% 45%;
+            box-shadow: 
+                0 0 30px rgba(255, 0, 85, 0.4),
+                inset 0 0 30px rgba(255, 0, 85, 0.1);
+        }
 
-    .terminal-header {
-      display: flex;
-      justify-content: flex-end;
-      padding: 0.5rem;
-    }
+        .skull-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
 
-    .terminal-button {
-      width: 1rem;
-      height: 1rem;
-      background: var(--neon-blue);
-      border-radius: 50%;
-      margin: 0 0.5rem;
-    }
+        .line {
+            position: absolute;
+            background: #ff0055;
+            box-shadow: 0 0 10px rgba(255, 0, 85, 0.6);
+        }
 
-    .terminal-content {
-      padding: 1rem;
-    }
+        .eye-socket {
+            position: absolute;
+            width: 60px;
+            height: 70px;
+            top: 35%;
+            border: 2px solid #ff0055;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
+        }
 
-    .cursor {
-      animation: blink 1s infinite;
-    }
+        .eye-left { left: 20%; }
+        .eye-right { right: 20%; }
 
-    @keyframes blink {
-      0% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
+        .nose {
+            position: absolute;
+            top: 52%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 25px solid #ff0055;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 85, 0.5));
+        }
 
-    .typing-text {
-      font-size: 1.5rem;
-    }
+        /* Circuit Lines */
+        .circuit-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 0.3;
+        }
 
-    .hero-subtitle {
-      font-size: 1.5rem;
-      margin: 2rem 0;
-    }
+        .circuit-path {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff0055, transparent);
+            animation: pulse 3s ease-in-out infinite;
+        }
 
-    .cta-button {
-      background: transparent;
-      border: 2px solid var(--neon-blue);
-      color: var(--neon-blue);
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: all 0.3s;
-      margin-top: 2rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
 
-    .cta-button:hover {
-      background: var(--neon-blue);
-      color: var(--dark-bg);
-      box-shadow: 0 0 20px var(--neon-blue);
-    }
+        .circuit-node {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ff0055;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.8);
+        }
 
-    .services {
-      padding: 4rem 2rem;
-    }
+        /* Hero Content */
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 650px;
+        }
 
-    .hex-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      padding: 2rem 0;
-    }
+        .name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 900;
+            letter-spacing: 4px;
+            margin-bottom: 0;
+            line-height: 0.9;
+            text-shadow: 0 0 20px rgba(255, 0, 85, 0.3);
+        }
 
-    .hex-item {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--neon-blue);
-      border-radius: 10px;
-      padding: 2rem;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+        .red-line {
+            width: 280px;
+            height: 5px;
+            background: linear-gradient(90deg, #ff0055, #cc0044);
+            margin: 15px 0 20px 0;
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.6);
+        }
 
-    .hex-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 20px var(--neon-blue);
-    }
+        .subtitle {
+            font-size: clamp(1.3rem, 2.5vw, 2rem);
+            font-weight: 700;
+            letter-spacing: 4px;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+        }
 
-    .hex-content {
-      padding: 1rem;
-    }
+        .main-heading {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+        }
 
-    .hex-content h3 {
-      color: var(--neon-blue);
-      margin-bottom: 1rem;
-    }
+        .highlight {
+            color: #ff0055;
+            display: block;
+            text-shadow: 0 0 30px rgba(255, 0, 85, 0.5);
+        }
 
-    .about {
-      padding: 4rem 2rem;
-    }
+        .description {
+            font-size: clamp(1rem, 1.8vw, 1.25rem);
+            line-height: 1.7;
+            margin-bottom: 50px;
+            color: #ccc;
+        }
 
-    .about-content {
-      background: rgba(10, 10, 18, 0.95);
-      padding: 1rem;
-      border: 1px solid var(--neon-blue);
-      border-radius: 10px;
-    }
+        .cta-btn {
+            display: inline-block;
+            padding: 22px 65px;
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(135deg, #b8174c 0%, #8b0036 100%);
+            border-radius: 50px;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(184, 23, 76, 0.4);
+        }
 
-    .matrix-rain {
-      background: linear-gradient(45deg, rgba(10, 10, 18, 0.9), rgba(150, 0, 255, 0.1));
-      height: 100px;
-      margin: 1rem 0;
-    }
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(184, 23, 76, 0.6);
+        }
 
-    .contact {
-      padding: 4rem 2rem;
-    }
+        /* About Section */
+        .about {
+            padding: 120px 80px;
+            background: linear-gradient(135deg, rgba(10, 10, 20, 0.95), rgba(26, 26, 46, 0.95)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23ff0055" opacity="0.03" width="1200" height="800"/><circle cx="100" cy="100" r="300" fill="%23ff0055" opacity="0.05"/><circle cx="1100" cy="700" r="400" fill="%238b0036" opacity="0.05"/></svg>');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
 
-    .contact-form {
-      background: rgba(10, 10, 18, 0.95);
-      padding: 1rem;
-      border: 1px solid var(--neon-blue);
-      border-radius: 10px;
-    }
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 50px;
+            text-align: center;
+            letter-spacing: 3px;
+        }
 
-    #secureForm {
-      display: flex;
-      flex-direction: column;
-      padding: 1rem;
-    }
+        .about-wrapper {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
 
-    #secureForm input, #secureForm textarea {
-      padding: 0.5rem;
-      margin: 0.5rem 0;
-      border: 1px solid var(--neon-blue);
-      border-radius: 5px;
-    }
+        .about-image {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
 
-    #secureForm textarea {
-      height: 100px;
-      resize: none;
-    }
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .img-border {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 100%;
+            height: 100%;
+            border: 3px solid #ff0055;
+            border-radius: 20px;
+            z-index: 1;
+            box-shadow: 0 0 30px rgba(255, 0, 85, 0.5);
+        }
+
+        .about-text {
+            text-align: left;
+        }
+
+        .about-text p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: #ccc;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 15px;
+            border: 2px solid rgba(255, 0, 85, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            border-color: #ff0055;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 0, 85, 0.3);
+        }
+
+        .stat-item h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: #ff0055;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            color: #aaa;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 120px 80px;
+            background: linear-gradient(135deg, rgba(10, 10, 20, 0.95), rgba(22, 33, 62, 0.95)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="%23ff0055" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="1200" height="800" fill="url(%23grid)"/><circle cx="200" cy="200" r="3" fill="%23ff0055" opacity="0.4"/><circle cx="600" cy="400" r="3" fill="%23ff0055" opacity="0.4"/><circle cx="1000" cy="600" r="3" fill="%23ff0055" opacity="0.4"/></svg>');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 0, 85, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.8) 0%, rgba(22, 33, 62, 0.8) 100%);
+            padding: 50px 35px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 0, 85, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 0, 85, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff0055;
+            box-shadow: 0 20px 60px rgba(255, 0, 85, 0.3);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: #ff0055;
+            margin-bottom: 25px;
+        }
+
+        .service-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        .service-desc {
+            color: #aaa;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* Blog Section */
+        .blog {
+            padding: 120px 80px;
+            background: linear-gradient(135deg, rgba(15, 15, 30, 0.95), rgba(26, 26, 46, 0.95)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="grad1" x1="0%25" y1="0%25" x2="100%25" y2="100%25"><stop offset="0%25" style="stop-color:%23ff0055;stop-opacity:0.1"/><stop offset="100%25" style="stop-color:%238b0036;stop-opacity:0.05"/></linearGradient></defs><rect width="1200" height="800" fill="url(%23grad1)"/><path d="M0,400 Q300,300 600,400 T1200,400" stroke="%23ff0055" stroke-width="2" opacity="0.15" fill="none"/><path d="M0,500 Q300,400 600,500 T1200,500" stroke="%23ff0055" stroke-width="2" opacity="0.1" fill="none"/></svg>');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .blog::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: radial-gradient(circle at 80% 50%, rgba(255, 0, 85, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .blog-card {
+            background: rgba(22, 33, 62, 0.6);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            backdrop-filter: blur(10px);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff0055;
+            box-shadow: 0 20px 60px rgba(255, 0, 85, 0.3);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #ff0055 0%, #8b0036 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .blog-content {
+            padding: 35px;
+        }
+
+        .blog-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .blog-excerpt {
+            color: #aaa;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .blog-date {
+            color: #ff0055;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 60px 80px;
+            background: #0a0a14;
+            text-align: center;
+            border-top: 2px solid rgba(255, 0, 85, 0.2);
+        }
+
+        .footer-text {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .skull-container {
+                width: 50%;
+                opacity: 0.6;
+            }
+            
+            .hero {
+                padding: 0 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 0 30px;
+                min-height: 100vh;
+            }
+            
+            .skull-container {
+                width: 80%;
+                right: -20%;
+                opacity: 0.3;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+            }
+            
+            .about, .services, .blog {
+                padding: 80px 30px;
+            }
+
+            .about-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-image {
+                width: 100%;
+                max-width: 350px;
+                height: 350px;
+                margin: 0 auto;
+            }
+
+            .about-text {
+                text-align: center;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-grid, .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="noise-overlay"></div>
-  
-  <nav>
-    <div class="nav-links">
-      <a href="#home">HOME</a>
-      <a href="#services">SERVICES</a>
-      <a href="#about">ABOUT</a>
-      <a href="#team">TEAM</a>
-      <a href="#contact">CONTACT</a>
-    </div>
-  </nav>
-
-  <section id="home" class="hero">
-    <div class="terminal-container">
-      <div class="terminal-header">
-        <span class="terminal-button"></span>
-        <span class="terminal-button"></span>
-        <span class="terminal-button"></span>
-      </div>
-      <div class="terminal-content">
-        <span class="cursor">></span> <span class="typing-text">Welcome to 0x1Sm_</span>
-      </div>
-    </div>
-    <p class="hero-subtitle">// Securing the Digital Frontier</p>
-    <button class="cta-button">Initialize Security Protocol</button>
-  </section>
-
-  <section id="services" class="services">
-    <h2 class="section-title">[Services]</h2>
-    <div class="hex-grid">
-      <div class="hex-item">
-        <div class="hex-content">
-          <h3>Offensive Security</h3>
-          <p>Advanced penetration testing and red team operations</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Circuit Lines Background -->
+        <div class="circuit-lines">
+            <div class="circuit-path" style="top: 15%; left: 10%; width: 200px; transform: rotate(45deg);"></div>
+            <div class="circuit-path" style="top: 25%; right: 15%; width: 250px; transform: rotate(-30deg);"></div>
+            <div class="circuit-path" style="bottom: 20%; left: 5%; width: 180px; transform: rotate(60deg);"></div>
+            <div class="circuit-node" style="top: 20%; left: 15%;"></div>
+            <div class="circuit-node" style="top: 30%; right: 20%;"></div>
+            <div class="circuit-node" style="bottom: 25%; left: 10%;"></div>
         </div>
-      </div>
-      <div class="hex-item">
-        <div class="hex-content">
-          <h3>Zero-Day Research</h3>
-          <p>Vulnerability research and exploit development</p>
-        </div>
-      </div>
-      <div class="hex-item">
-        <div class="hex-content">
-          <h3>Incident Response</h3>
-          <p>24/7 emergency response and threat elimination</p>
-        </div>
-      </div>
-      <div class="hex-item">
-        <div class="hex-content">
-          <h3>Binary Analysis</h3>
-          <p>Reverse engineering and malware analysis</p>
-        </div>
-      </div>
-      <div class="hex-item">
-        <div class="hex-content">
-          <h3>Secure Architecture</h3>
-          <p>Zero-trust network design and implementation</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <section id="about" class="about">
-    <h2 class="section-title">[About Us]</h2>
-    <div class="about-content">
-      <div class="matrix-rain"></div>
-      <p>0x1Sm operates at the intersection of offensive security and defensive excellence. Our team of elite security researchers and engineers work tirelessly to stay ahead of emerging threats.</p>
-    </div>
-  </section>
+        <!-- Skull with Hood -->
+        <div class="skull-container">
+            <div class="skull-overlay"></div>
+            <div class="skull-figure">
+                <div class="hood"></div>
+                <div class="skull">
+                    <div class="skull-outline"></div>
+                    <div class="skull-lines">
+                        <div class="line" style="width: 120px; height: 2px; top: 25%; left: 50%; transform: translateX(-50%) rotate(-15deg);"></div>
+                        <div class="line" style="width: 2px; height: 80px; top: 20%; left: 30%;"></div>
+                        <div class="line" style="width: 2px; height: 80px; top: 20%; right: 30%;"></div>
+                        <div class="line" style="width: 100px; height: 2px; top: 60%; left: 50%; transform: translateX(-50%);"></div>
+                    </div>
+                    <div class="eye-socket eye-left"></div>
+                    <div class="eye-socket eye-right"></div>
+                    <div class="nose"></div>
+                </div>
+            </div>
+        </div>
 
-  <section id="contact" class="contact">
-    <h2 class="section-title">[Contact]</h2>
-    <div class="contact-form">
-      <form id="secureForm">
-        <input type="text" placeholder="IDENTIFIER [NAME]" required>
-        <input type="email" placeholder="COMM_CHANNEL [EMAIL]" required>
-        <textarea placeholder="TRANSMISSION_CONTENT [MESSAGE]" required></textarea>
-        <button type="submit" class="cta-button">TRANSMIT</button>
-      </form>
-    </div>
-  </section>
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <h1 class="name">SHERIF MOUNIR</h1>
+            <div class="red-line"></div>
+            <p class="subtitle">OFFENSIVE SECURITY</p>
+            
+            <h2 class="main-heading">
+                MASTERING THE ART OF
+                <span class="highlight">OFFENSIVE SECURITY</span>
+            </h2>
+            
+            <p class="description">
+                Specializing in advanced penetration testing, exploit development, and proactive threat intelligence.
+            </p>
+            
+            <a href="#services" class="cta-btn">EXPLORE SERVICES</a>
+        </div>
+    </section>
 
-  <script type="module" src="main.js"></script>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2 class="section-title">ABOUT <span style="color: #ff0055;">ME</span></h2>
+        <div class="about-wrapper">
+            <div class="about-image">
+                <img src="https://i.imgur.com/placeholder.jpg" alt="Sherif Mounir" class="profile-img">
+                <div class="img-border"></div>
+            </div>
+            <div class="about-text">
+                <p>Hello, I'm Sherif Mounir - an Offensive Security Expert with over 5 years of experience in penetration testing and exploit development. I specialize in discovering vulnerabilities in systems and applications before attackers can exploit them.</p>
+                <p style="margin-top: 25px;">I provide my services to companies and organizations to protect their digital infrastructure through comprehensive and advanced penetration testing operations.</p>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <h3>5+</h3>
+                        <p>Years Experience</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>100+</h3>
+                        <p>Projects Completed</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>50+</h3>
+                        <p>Happy Clients</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2 class="section-title">MY <span style="color: #ff0055;">SERVICES</span></h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🌐</div>
+                <h3 class="service-title">WEB APPLICATION PENTEST</h3>
+                <p class="service-desc">Comprehensive web application penetration testing to discover XSS, SQL Injection, CSRF, and other critical vulnerabilities.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <h3 class="service-title">MOBILE APPLICATION PENTEST</h3>
+                <p class="service-desc">Security testing for Android and iOS applications to identify vulnerabilities and ensure user data protection.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🔒</div>
+                <h3 class="service-title">NETWORK PENETRATION TESTING</h3>
+                <p class="service-desc">Assessment of internal and external network security to discover weaknesses in network infrastructure.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🦠</div>
+                <h3 class="service-title">MALWARE DEVELOPMENT</h3>
+                <p class="service-desc">Custom malware development for security research purposes and testing system protection capabilities.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🎯</div>
+                <h3 class="service-title">AD ATTACKS</h3>
+                <p class="service-desc">Active Directory security testing to discover privilege vulnerabilities and escalation in Windows environments.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog">
+        <h2 class="section-title">LATEST <span style="color: #ff0055;">ARTICLES</span></h2>
+        <div class="blog-grid">
+            <div class="blog-card">
+                <div class="blog-image">📝</div>
+                <div class="blog-content">
+                    <h3 class="blog-title">Advanced Web Exploitation Techniques</h3>
+                    <p class="blog-excerpt">Exploring advanced techniques in web application exploitation and how to leverage modern vulnerabilities...</p>
+                    <span class="blog-date">October 1, 2025</span>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-image">🔐</div>
+                <div class="blog-content">
+                    <h3 class="blog-title">Active Directory Attack Vectors</h3>
+                    <p class="blog-excerpt">A comprehensive guide to Active Directory attack methods and protection strategies...</p>
+                    <span class="blog-date">September 28, 2025</span>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-image">⚡</div>
+                <div class="blog-content">
+                    <h3 class="blog-title">Zero-Day Vulnerability Research</h3>
+                    <p class="blog-excerpt">How to research new security vulnerabilities and the process of discovering Zero-Days...</p>
+                    <span class="blog-date">September 15, 2025</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">© 2025 Sherif Mounir - Offensive Security Expert. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animate on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .blog-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
